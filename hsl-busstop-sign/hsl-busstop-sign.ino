@@ -23,7 +23,7 @@ void setup() {
   delay(1000);
   Serial.println("[WIFI] connecting to wifi ...");
   WiFi.mode(WIFI_STA);
-  WiFiMulti.addAP("***REMOVED***", "***REMOVED***");
+  WiFiMulti.addAP("***", "***");
 }
 
 void loop() {
