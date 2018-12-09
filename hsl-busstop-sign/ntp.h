@@ -20,6 +20,8 @@ public:
    * The Unix time is returned, that is, seconds from 1970-01-01T00:00.
    */
   unsigned long inline unixTime() {
+    Serial.printf("[NTP] query current time ...\n");
+
     static int udpInited = udp.begin(123); // open socket on arbitrary port
 
     const char timeServer[] = "pool.ntp.org"; // NTP server
@@ -75,7 +77,11 @@ public:
     // Discard the rest of the packet
     udp.flush();
 
-    return time - 2208988800ul; // convert NTP time to Unix time
+    long timestamp = time - 2208988800ul; // convert NTP time to Unix time
+
+    Serial.printf("[NTP] timestamp %ld\n", timestamp);
+
+    return timestamp;
   }
 };
 
