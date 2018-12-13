@@ -26,3 +26,9 @@ HSL (Helsingin Seudun Liikenne) busstop sign based on NodeMCU
 [HSL]  79 Herttoniemi 11m
 [HSL]  57 Munkkiniemi 16m
 ```
+
+## Usage
+
+This is implemented as an PlatformIO project and comes with all needed configuration in `platformio.ini`.
+Change the `WIFI_SSID` and `WIFI_PASSWORD` and check if the `HSL_FINGERPRINT` is still up to date.
+
