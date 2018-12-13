@@ -27,6 +27,8 @@ HSL (Helsingin Seudun Liikenne) busstop sign based on NodeMCU
 [HSL]  57 Munkkiniemi 16m
 ```
 
+![](hsl-busstop-sign.png)
+
 ## Usage
 
 This is implemented as an PlatformIO project and comes with all needed configuration in `platformio.ini`.
