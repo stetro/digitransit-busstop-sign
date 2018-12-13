@@ -1,6 +1,6 @@
 /**
   HSL Bus Station Query
-  - Queries data from HSl viw GraphQL
+  - Queries data from HSL with GraphQL
   - Gets current timestamp via NTP
   - Display current waiting time on Serial (display is coming)
 */
