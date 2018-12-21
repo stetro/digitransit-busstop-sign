@@ -3,7 +3,7 @@ HSL (Helsingin Seudun Liikenne) busstop sign based on NodeMCU
 
   - Queries data from HSL with GraphQL
   - Gets current timestamp via NTP
-  - Display current waiting time on Serial (display is coming)
+  - Display current waiting time on Serial and I2C LiquidCrystal Display (20x4)
 
 ```
 [WIFI] connecting to wifi ...
@@ -33,4 +33,15 @@ HSL (Helsingin Seudun Liikenne) busstop sign based on NodeMCU
 
 This is implemented as an PlatformIO project and comes with all needed configuration in `platformio.ini`.
 Change the `WIFI_SSID` and `WIFI_PASSWORD` and check if the `HSL_FINGERPRINT` is still up to date.
+
+### Partlist
+
+For the basic usage only the NodeMcu and LCD display is needed.
+
+* NodeMcu 2
+* LCD Display 20x4 with I2C Adapter
+* [Tactile Push Button]
+* [10k Resistor]
+* [Lithium Ion Battery 3.7]
+* [5V stepup board with charging circuit]
 
