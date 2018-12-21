@@ -22,7 +22,7 @@
 
 #define HSL_LINES 4
 
-#define HSL_STRING_SIZE 19
+#define HSL_STRING_SIZE 40
 
 #define STR_(X) #X
 

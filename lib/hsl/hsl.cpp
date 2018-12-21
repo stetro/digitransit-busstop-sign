@@ -35,7 +35,7 @@ bool Hsl::handleResponse(HTTPClient *http) {
   if (root.success()) {
     Serial.println("[JSON] success, parsed correctly");
     long timestamp = ntp.unixTime();
-    sprintf(station_name, "%" STR(HSL_STRING_SIZE) "." STR(HSL_STRING_SIZE) "s",
+    sprintf(station_name, "%." STR(HSL_STRING_SIZE) "s",
             root["data"]["stop"]["name"].as<const char *>());
     Serial.printf("[HSL] Station: %s\n", station_name);
 
@@ -50,11 +50,11 @@ bool Hsl::handleResponse(HTTPClient *http) {
       sprintf(timetable[i][0], "%3.3s",
               busses[i]["trip"]["route"]["shortName"].as<const char *>());
       sprintf(timetable[i][1],
-              "%" STR(HSL_STRING_SIZE) "." STR(HSL_STRING_SIZE) "s",
+              "%." STR(HSL_STRING_SIZE) "s",
               busses[i]["headsign"].as<const char *>());
       sprintf(timetable[i][2], "%2.2dm", (departureFromNow / 60) + 1);
       Serial.printf(
-          "[HSL] %s %" STR(HSL_STRING_SIZE) "." STR(HSL_STRING_SIZE) "s %s\n",
+          "[HSL] %s %-" STR(HSL_STRING_SIZE) "." STR(HSL_STRING_SIZE) "s %s\n",
           timetable[i][0], timetable[i][1], timetable[i][2]);
     }
     success = true;
