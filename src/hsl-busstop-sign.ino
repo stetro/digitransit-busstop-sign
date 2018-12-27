@@ -11,8 +11,8 @@
 
 #include "hsl.h"
 
-#define WIFI_SSID "***REMOVED***"
-#define WIFI_PASSWORD "***REMOVED***"
+#define WIFI_SSID "***"
+#define WIFI_PASSWORD "***"
 #define RUNTIME_MINUTES_S 5
 #define REFRESH_INTERVAL_S 30
 #define SCROLL_INTERVAL_MS 500
