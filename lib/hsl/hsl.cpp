@@ -49,8 +49,7 @@ bool Hsl::handleResponse(HTTPClient *http) {
       }
       sprintf(timetable[i][0], "%3.3s",
               busses[i]["trip"]["route"]["shortName"].as<const char *>());
-      sprintf(timetable[i][1],
-              "%." STR(HSL_STRING_SIZE) "s",
+      sprintf(timetable[i][1], "%." STR(HSL_STRING_SIZE) "s",
               busses[i]["headsign"].as<const char *>());
       sprintf(timetable[i][2], "%2.2dm", (departureFromNow / 60) + 1);
       Serial.printf(

@@ -1,16 +1,15 @@
 #ifndef NTP_H
 #define NTP_H
 
-#include <WiFiUdp.h>
 #include <Arduino.h>
+#include <WiFiUdp.h>
 
 class Ntp {
-private:
+ private:
   WiFiUDP udp;
 
-public:
-  
+ public:
   unsigned long unixTime();
 };
 
-#endif // NTP_H
+#endif  // NTP_H

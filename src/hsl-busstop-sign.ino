@@ -74,7 +74,7 @@ void displayTimetable() {
     stringLengths[i] = strlen(hsl.timetable[i][1]);
   }
   int scroll_position = 0;
-  
+
   while ((scroll_position * SCROLL_INTERVAL_MS) < (REFRESH_INTERVAL_S * 1000)) {
     Serial.println("");
     for (size_t i = 0; i < HSL_LINES; i++) {
@@ -88,8 +88,10 @@ void displayTimetable() {
         // }
         offset = scroll_position % (range + 1);
       }
-      lcd.printf("%3.3s %12.12s %3.3s", hsl.timetable[i][0], hsl.timetable[i][1] + offset, hsl.timetable[i][2]);
-      Serial.printf("%3.3s %12.12s %3.3s\n", hsl.timetable[i][0], hsl.timetable[i][1] + offset, hsl.timetable[i][2]);
+      lcd.printf("%3.3s %12.12s %3.3s", hsl.timetable[i][0],
+                 hsl.timetable[i][1] + offset, hsl.timetable[i][2]);
+      Serial.printf("%3.3s %12.12s %3.3s\n", hsl.timetable[i][0],
+                    hsl.timetable[i][1] + offset, hsl.timetable[i][2]);
     }
     scroll_position++;
     delay(SCROLL_INTERVAL_MS);
