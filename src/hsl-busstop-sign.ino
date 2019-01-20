@@ -13,18 +13,19 @@
 
 #define WIFI_SSID "***"
 #define WIFI_PASSWORD "***"
-#define RUNTIME_MINUTES_S 5
+#define RUNTIME_M 5
 #define REFRESH_INTERVAL_S 30
-#define SCROLL_INTERVAL_MS 500
+#define SCROLL_INTERVAL_MS 1000
 
 ESP8266WiFiMulti WiFiMulti;
-LiquidCrystal_I2C lcd(0x38);
+LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 Hsl hsl;
 
 void setup() {
   Serial.begin(115200);
-  lcd.begin(20, 4);
+  lcd.init();
+  lcd.noCursor();
   lcd.display();
   lcd.backlight();
   lcd.clear();
@@ -39,9 +40,10 @@ void setup() {
 void loop() {
   if (wifiConnected()) {
     Serial.println("[WIFI] connected");
-    for (size_t i = 0; i < RUNTIME_MINUTES_S * 2; i++) {
+    for (size_t i = 0; i < RUNTIME_M * 60 / REFRESH_INTERVAL_S; i++) {
       queryAndShowHslTimetable();
     }
+    lcd.clear();
     lcd.noBacklight();
     lcd.noDisplay();
     ESP.deepSleep(0);
