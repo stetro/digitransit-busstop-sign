@@ -10,7 +10,7 @@
 #define HSL_QUERY                                                        \
   "{\"query\":\"{\\n  stop(id:\\\"HSL:1362130\\\") {\\n name\\n "        \
   "stoptimesWithoutPatterns(numberOfDepartures: 10) {\\n serviceDay\\n " \
-  "scheduledArrival\\n scheduledDeparture\\n trip {\\n route {\\n "      \
+  "realtimeDeparture\\n trip {\\n route {\\n "      \
   "shortName\\n }\\n }\\n headsign\\n }\\n  } "                          \
   "\\n}\",\"variables\":null,\"operationName\":null}"
 

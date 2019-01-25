@@ -16,7 +16,7 @@ unsigned long Ntp::unixTime() {
 
   static int udpInited = udp.begin(123);  // open socket on arbitrary port
 
-  const char timeServer[] = "pool.ntp.org";  // NTP server
+  const char timeServer[] = "fi.pool.ntp.org";  // NTP server
 
   // Only the first four bytes of an outgoing NTP packet need to be set
   // appropriately, the rest can be whatever.

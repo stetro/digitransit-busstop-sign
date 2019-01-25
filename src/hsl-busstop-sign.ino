@@ -31,7 +31,6 @@ void setup() {
   lcd.clear();
   lcd.setCursor(1, 1);
   lcd.print("Loading ...");
-  delay(1000);
   Serial.println("[WIFI] connecting to wifi ...");
   WiFi.mode(WIFI_STA);
   WiFiMulti.addAP(WIFI_SSID, WIFI_PASSWORD);

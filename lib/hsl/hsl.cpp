@@ -35,13 +35,18 @@ bool Hsl::handleResponse(HTTPClient *http) {
   if (root.success()) {
     Serial.println("[JSON] success, parsed correctly");
     long timestamp = ntp.unixTime();
+    while(timestamp == 0){
+      timestamp = ntp.unixTime();
+      delay(100);
+    }
+    
     sprintf(station_name, "%." STR(HSL_STRING_SIZE) "s",
             root["data"]["stop"]["name"].as<const char *>());
     Serial.printf("[HSL] Station: %s\n", station_name);
 
     JsonArray &busses = root["data"]["stop"]["stoptimesWithoutPatterns"];
     for (uint i = 0; i < busses.size() && i < HSL_LINES; i++) {
-      int lineDeparture = busses[i]["scheduledDeparture"];
+      int lineDeparture = busses[i]["realtimeDeparture"];
       long lineServiceDay = busses[i]["serviceDay"];
       int departureFromNow = (lineServiceDay + lineDeparture) - timestamp;
       if (departureFromNow < 0) {
