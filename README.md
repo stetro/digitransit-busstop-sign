@@ -1,4 +1,5 @@
 # hsl-busstop-sign
+[![Build Status](https://travis-ci.com/stetro/hsl-busstop-sign.svg?branch=master)](https://travis-ci.com/stetro/hsl-busstop-sign)
 HSL (Helsingin Seudun Liikenne) busstop sign based on NodeMCU
 
   - Queries data from HSL with GraphQL
