@@ -35,11 +35,11 @@ bool Hsl::handleResponse(HTTPClient *http) {
   if (root.success()) {
     Serial.println("[JSON] success, parsed correctly");
     long timestamp = ntp.unixTime();
-    while(timestamp == 0){
+    while (timestamp == 0) {
       timestamp = ntp.unixTime();
       delay(100);
     }
-    
+
     sprintf(station_name, "%." STR(HSL_STRING_SIZE) "s",
             root["data"]["stop"]["name"].as<const char *>());
     Serial.printf("[HSL] Station: %s\n", station_name);
