@@ -8,6 +8,8 @@ HSL (Helsingin Seudun Liikenne) busstop sign based on ESP8266 or ESP32
     - I2C OLED display supported
     - 20x4 Liquid Crystal display supported
 
+![](demo.jpg)
+
 ```
 [WIFI] connecting to wifi ...
 [WIFI] not connected to wifi, retry ...
@@ -51,8 +53,8 @@ How to build your own HSL Busstop Sign:
 
 For the basic usage only the NodeMcu and LCD display is needed.
 
-* NodeMcu 2
-* LCD Display 20x4 with I2C Adapter
+* NodeMCU ESP32 or NodeMCU ESP8266
+* LCD Display 20x4 with I2C Adapter or OLED I2C Display
 * [Tactile Push Button]
 * [10k Resistor]
 * [Lithium Ion Battery 3.7]
