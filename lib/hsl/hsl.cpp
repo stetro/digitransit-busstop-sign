@@ -1,7 +1,7 @@
 
 #include "hsl.h"
 
-bool Hsl::queryTimetable(const char *query) {
+bool Hsl::queryTimetable() {
   bool success = false;
   Serial.print("[HTTP] start query ...\n");
 
@@ -13,6 +13,9 @@ bool Hsl::queryTimetable(const char *query) {
   http.begin(HSL_URL, HSL_FINGERPRINT);
 #endif
   http.addHeader("Content-Type", "application/json");
+  String query = String(HSL_QUERY);
+
+  query.replace("HSL_STATION_ID", HSL_STATION_ID);
   int httpCode = http.POST(query);
 
   if (httpCode > 0) {

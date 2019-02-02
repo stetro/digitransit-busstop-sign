@@ -15,7 +15,7 @@
 #include "ntp.h"
 
 #define HSL_QUERY                                                        \
-  "{\"query\":\"{\\n  stop(id:\\\"HSL:1362130\\\") {\\n name\\n "        \
+  "{\"query\":\"{\\n  stop(id:\\\"HSL_STATION_ID\\\") {\\n name\\n "        \
   "stoptimesWithoutPatterns(numberOfDepartures: 10) {\\n serviceDay\\n " \
   "realtimeDeparture\\n trip {\\n route {\\n "                           \
   "shortName\\n }\\n }\\n headsign\\n }\\n  } "                          \
@@ -65,7 +65,7 @@ class Hsl {
   char station_name[HSL_STRING_SIZE + 1];
   char timetable[HSL_LINES][3][HSL_STRING_SIZE + 1];
 
-  bool queryTimetable(const char *query);
+  bool queryTimetable();
 
  private:
   Ntp ntp;

@@ -1,10 +1,12 @@
 # hsl-busstop-sign
 [![Build Status](https://travis-ci.com/stetro/hsl-busstop-sign.svg?branch=master)](https://travis-ci.com/stetro/hsl-busstop-sign)
-HSL (Helsingin Seudun Liikenne) busstop sign based on NodeMCU
+HSL (Helsingin Seudun Liikenne) busstop sign based on ESP8266 or ESP32
 
   - Queries data from HSL with GraphQL
   - Gets current timestamp via NTP
-  - Display current waiting time on Serial and I2C LiquidCrystal Display (20x4)
+  - Display current waiting time on Serial and I2C Display
+    - I2C OLED display supported
+    - 20x4 Liquid Crystal display supported
 
 ```
 [WIFI] connecting to wifi ...
@@ -32,8 +34,18 @@ HSL (Helsingin Seudun Liikenne) busstop sign based on NodeMCU
 
 ## Usage
 
-This is implemented as an PlatformIO project and comes with all needed configuration in `platformio.ini`.
-Change the `WIFI_SSID` and `WIFI_PASSWORD` and check if the `HSL_FINGERPRINT` is still up to date.
+How to build your own HSL Busstop Sign:
+
+1. Find your station ID after search in the address bar of https://reittiopas.hsl.fi
+2. Set all needed variables in `platformio.ini`
+  - `hsl_station_id` - Graph QL HSL Station ID
+  - `display` - `0` for Liquid Crystal Display and `1` for OLED Display
+  - `display_address` - I2C display address
+  - `wifi_ssid` and `widi_password`
+3. Install PlatformIO and flash NodeMCU
+  - `pip install -U platformio`
+  - `platformio update`
+  - `platformio run --target upload`
 
 ### Partlist
 

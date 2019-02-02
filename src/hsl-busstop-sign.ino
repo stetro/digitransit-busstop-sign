@@ -1,13 +1,3 @@
-/**
-  HSL Bus Station Query
-  - Queries data from HSL with GraphQL
-  - Gets current timestamp via NTP
-  - Display current waiting time on Serial and I2C LiquidCrystal Display
-*/
-
-
-#define WIFI_SSID "***"
-#define WIFI_PASSWORD "***"
 
 #include <Arduino.h>
 
@@ -38,7 +28,7 @@ void setup() {
 void loop() {
   if (wifiConnected()) {
     Serial.println("[WIFI] connected");
-    if (hsl.queryTimetable(HSL_QUERY)) {
+    if (hsl.queryTimetable()) {
       while (true) {
         display.clear();
         display.updateTimetable(&hsl);
