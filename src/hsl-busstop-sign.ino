@@ -28,16 +28,16 @@ void setup() {
 void loop() {
   if (wifiConnected()) {
     Serial.println("[WIFI] connected");
-    if (hsl.queryTimetable()) {
-      while (true) {
+    while (true) {
+      if (hsl.queryTimetable()) {
         display.clear();
         display.updateTimetable(&hsl);
         display.showTimetable();
         delay(60000);
+      } else {
+        display.showError();
+        delay(10000);
       }
-    } else {
-      display.showError();
-      delay(20000);
     }
     display.clear();
     display.turnOff();

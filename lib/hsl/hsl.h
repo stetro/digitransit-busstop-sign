@@ -69,9 +69,13 @@ class Hsl {
 
  private:
   Ntp ntp;
+  byte c1;
   StaticJsonBuffer<4096> json_buffer;
 
   bool handleResponse(HTTPClient *http);
+  byte utf8ascii(byte ascii);
+  String utf8ascii(String s);
+  void utf8ascii(char* s);
 };
 
 #endif  // HSL_H
