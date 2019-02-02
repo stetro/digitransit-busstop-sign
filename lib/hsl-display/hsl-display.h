@@ -9,13 +9,15 @@
 #define HSL_DISPLAY_ADDRESS 0x3C
 #endif  // HSL_DISPLAY_ADDRESS
 
+#include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <SSD1306Wire.h>
-#include <Wire.h>
 #include <hsl.h>
 
 #if HSL_DISPLAY == 1
 #include <hsl-display-font.h>
+#define PIN_WIRE_SDA 21
+#define PIN_WIRE_SCL 22
 #endif
 
 class HslDisplay {

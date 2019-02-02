@@ -7,7 +7,11 @@ bool Hsl::queryTimetable(const char *query) {
 
   // start htps query
   HTTPClient http;
+#ifdef NODE_MCU_ESP32
+  http.begin(HSL_URL, HSL_CERTIFICATE);
+#else
   http.begin(HSL_URL, HSL_FINGERPRINT);
+#endif
   http.addHeader("Content-Type", "application/json");
   int httpCode = http.POST(query);
 

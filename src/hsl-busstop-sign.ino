@@ -10,12 +10,17 @@
 #define WIFI_PASSWORD "***"
 
 #include <Arduino.h>
-#include <ESP8266WiFiMulti.h>
+
+#ifdef NODE_MCU_ESP8266
+#include <ESP8266WiFi.h>
+#endif
+
+#ifdef NODE_MCU_ESP32
+#include <WiFi.h>
+#endif
 
 #include <hsl-display.h>
 #include <hsl.h>
-
-ESP8266WiFiMulti WiFiMulti;
 
 Hsl hsl;
 HslDisplay display;
@@ -27,31 +32,29 @@ void setup() {
   display.showLoadingScreen();
 
   Serial.println("[WIFI] connecting to wifi ...");
-  WiFi.mode(WIFI_STA);
-  WiFiMulti.addAP(WIFI_SSID, WIFI_PASSWORD);
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 }
 
 void loop() {
   if (wifiConnected()) {
     Serial.println("[WIFI] connected");
-    display.clear();
     if (hsl.queryTimetable(HSL_QUERY)) {
       while (true) {
+        display.clear();
         display.updateTimetable(&hsl);
         display.showTimetable();
         delay(60000);
       }
     } else {
       display.showError();
-      delay(1000);
+      delay(20000);
     }
     display.clear();
     display.turnOff();
-    ESP.deepSleep(0);
   } else {
     Serial.println("[WIFI] not connected to wifi, still trying ...");
     delay(1000);
   }
 }
 
-bool wifiConnected() { return (WiFiMulti.run() == WL_CONNECTED); }
+bool wifiConnected() { return (WiFi.status() == WL_CONNECTED); }
