@@ -25,11 +25,11 @@ HSL (Helsingin Seudun Liikenne) and Tampere busstop sign based on ESP8266 or ESP
 [NTP] query current time ...
 [NTP] timestamp 1544374441
 
-[HSL] Station:    Erik Spåren tie
-[HSL] 506 Meilahti vi 03m
-[HSL]  78 Rautatiento 05m
-[HSL]  79 Herttoniemi 11m
-[HSL]  57 Munkkiniemi 16m
+[DIGITRANSIT] Station:    Erik Spåren tie
+[DIGITRANSIT] 506 Meilahti vi 03m
+[DIGITRANSIT]  78 Rautatiento 05m
+[DIGITRANSIT]  79 Herttoniemi 11m
+[DIGITRANSIT]  57 Munkkiniemi 16m
 ```
 
 ![](hsl-busstop-sign.png)
@@ -40,7 +40,7 @@ How to build your own HSL Busstop Sign:
 
 1. Find your station ID after search in the address bar of https://reittiopas.hsl.fi or https://reittiopas.tampere.fi
 2. Set all needed variables in `platformio.ini`
-  - `hsl_station_id` - Graph QL HSL or Tampere Station ID
+  - `digitransit_station_id` - Graph QL HSL or Tampere Station ID
   - `digitransit_id` - To switch between HSL and Tampere (`hsl` or `waltti`)
   - `display` - `0` for Liquid Crystal Display and `1` for OLED Display
   - `display_address` - I2C display address

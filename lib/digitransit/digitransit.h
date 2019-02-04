@@ -1,5 +1,5 @@
-#ifndef HSL_H
-#define HSL_H
+#ifndef DIGITRANSIT_H
+#define DIGITRANSIT_H
 
 #include <Arduino.h>
 #include <ArduinoJson.h>
@@ -14,20 +14,20 @@
 
 #include "ntp.h"
 
-#define HSL_QUERY                                                        \
-  "{\"query\":\"{\\n  stop(id:\\\"HSL_STATION_ID\\\") {\\n name\\n "        \
+#define DIGITRANSIT_QUERY                                                        \
+  "{\"query\":\"{\\n  stop(id:\\\"DIGITRANSIT_STATION_ID\\\") {\\n name\\n "        \
   "stoptimesWithoutPatterns(numberOfDepartures: 10) {\\n serviceDay\\n " \
   "realtimeDeparture\\n trip {\\n route {\\n "                           \
   "shortName\\n }\\n }\\n headsign\\n }\\n  } "                          \
   "\\n}\",\"variables\":null,\"operationName\":null}"
 
-#define HSL_URL \
+#define DIGITRANSIT_URL \
   "https://api.digitransit.fi:443/routing/v1/routers/DIGITRANSIT_ID/index/graphql"
 
-#define HSL_FINGERPRINT \
+#define DIGITRANSIT_FINGERPRINT \
   "8F FD 07 4E 5A 22 19 B4 75 17 45 69 59 88 7C AF 07 75 A4 B6"
 
-#define HSL_CERTIFICATE                                                \
+#define DIGITRANSIT_CERTIFICATE                                                \
   "-----BEGIN CERTIFICATE-----\n"                                      \
   "MIIDxTCCAq2gAwIBAgIQAqxcJmoLQJuPC3nyrkYldzANBgkqhkiG9w0BAQUFADBs\n" \
   "MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3\n" \
@@ -52,18 +52,18 @@
   "+OkuE6N36B9K\n"                                                     \
   "-----END CERTIFICATE-----\n"
 
-#define HSL_LINES 4
+#define DIGITRANSIT_LINES 4
 
-#define HSL_STRING_SIZE 40
+#define DIGITRANSIT_STRING_SIZE 40
 
 #define STR_(X) #X
 
 #define STR(X) STR_(X)
 
-class Hsl {
+class Digitransit {
  public:
-  char station_name[HSL_STRING_SIZE + 1];
-  char timetable[HSL_LINES][3][HSL_STRING_SIZE + 1];
+  char station_name[DIGITRANSIT_STRING_SIZE + 1];
+  char timetable[DIGITRANSIT_LINES][3][DIGITRANSIT_STRING_SIZE + 1];
 
   bool queryTimetable();
 
@@ -74,4 +74,4 @@ class Hsl {
   bool handleResponse(HTTPClient *http);
 };
 
-#endif  // HSL_H
+#endif  // DIGITRANSIT_H

@@ -9,16 +9,18 @@
 #include <WiFi.h>
 #endif
 
-#include <hsl-display.h>
-#include <hsl.h>
+#include <digitransit-display.h>
+#include <digitransit.h>
 
-Hsl hsl;
+Digitransit digitransit;
 
-#if HSL_DISPLAY == 0
+#if DIGITRANSIT_DISPLAY == 0
 LiquidCrystalDisplay display;
 #else
 OledDisplay display;
 #endif
+
+bool wifiConnected() { return (WiFi.status() == WL_CONNECTED); }
 
 void setup() {
   Serial.begin(115200);
@@ -34,9 +36,9 @@ void loop() {
   if (wifiConnected()) {
     Serial.println("[WIFI] connected");
     while (true) {
-      if (hsl.queryTimetable()) {
+      if (digitransit.queryTimetable()) {
         display.clear();
-        display.updateTimetable(&hsl);
+        display.updateTimetable(&digitransit);
         display.showTimetable();
         delay(60000);
       } else {
@@ -53,4 +55,3 @@ void loop() {
   }
 }
 
-bool wifiConnected() { return (WiFi.status() == WL_CONNECTED); }
