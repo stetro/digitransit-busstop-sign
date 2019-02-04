@@ -36,6 +36,16 @@ void loop() {
   if (wifiConnected()) {
     Serial.println("[WIFI] connected");
     while (true) {
+      // if (digitransit.queryBikeStation()) {
+      //   display.clear();
+      //   display.updateTimetable(&digitransit);
+      //   display.showBikeStation();
+      //   delay(5000);
+      // } else {
+      //   display.clear();
+      //   display.showError();
+      //   delay(10000);
+      // }
       if (digitransit.queryTimetable()) {
         display.clear();
         display.updateTimetable(&digitransit);

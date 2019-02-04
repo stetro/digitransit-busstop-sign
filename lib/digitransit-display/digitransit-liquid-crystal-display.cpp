@@ -1,8 +1,6 @@
 #include "digitransit-display.h"
 
-void LiquidCrystalDisplay::clear(){
-  lcd->clear();
-}
+void LiquidCrystalDisplay::clear() { lcd->clear(); }
 
 void LiquidCrystalDisplay::init() {
   Serial.printf("[Display] Connecting to Liquid Display 0x%02x\n",
@@ -31,13 +29,24 @@ void LiquidCrystalDisplay::turnOff() {
 void LiquidCrystalDisplay::showError() {
   Serial.println("[Display] Show Error");
   lcd->setCursor(0, 1);
-  lcd->print("DIGITRANSIT Query Error!");
+  lcd->print("Query Error!");
 }
 
 void LiquidCrystalDisplay::showTimetable() {
   Serial.println("[Display] Show Timetable");
   for (size_t i = 0; i < DIGITRANSIT_LINES; i++) {
     lcd->printf("%3.3s %12.12s %3.3s", digitransit->timetable[i][0],
-                digitransit->timetable[i][1] + time_table_ticker, digitransit->timetable[i][2]);
+                digitransit->timetable[i][1] + time_table_ticker,
+                digitransit->timetable[i][2]);
   }
+}
+
+void LiquidCrystalDisplay::showBikeStation() {
+  Serial.println("[Display] Bike Station");
+  lcd->setCursor(0, 0);
+  lcd->printf("%s", digitransit->station_name);
+  lcd->setCursor(0, 2);
+  lcd->printf("%s", digitransit->bike_station[0]);
+  lcd->setCursor(0, 3);
+  lcd->printf("%s", digitransit->bike_station[1]);
 }

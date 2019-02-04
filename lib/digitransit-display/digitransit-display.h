@@ -32,6 +32,7 @@ class DigitransitDisplay {
   virtual void clear() = 0;
   virtual void showTimetable() = 0;
   virtual void showLoadingScreen() = 0;
+  virtual void showBikeStation() = 0;
   virtual void showError() = 0;
   virtual void turnOff() = 0;
 
@@ -46,6 +47,7 @@ class OledDisplay : public DigitransitDisplay {
   void clear();
   void showTimetable();
   void showLoadingScreen();
+  void showBikeStation();
   void showError();
   void turnOff();
 
@@ -59,6 +61,7 @@ class LiquidCrystalDisplay : public DigitransitDisplay {
   void clear();
   void showTimetable();
   void showLoadingScreen();
+  void showBikeStation();
   void showError();
   void turnOff();
 

@@ -14,20 +14,27 @@
 
 #include "ntp.h"
 
-#define DIGITRANSIT_QUERY                                                        \
-  "{\"query\":\"{\\n  stop(id:\\\"DIGITRANSIT_STATION_ID\\\") {\\n name\\n "        \
-  "stoptimesWithoutPatterns(numberOfDepartures: 10) {\\n serviceDay\\n " \
-  "realtimeDeparture\\n trip {\\n route {\\n "                           \
-  "shortName\\n }\\n }\\n headsign\\n }\\n  } "                          \
+#define DIGITRANSIT_BUS_STATION_QUERY                                       \
+  "{\"query\":\"{\\n "                                                      \
+  "bikeRentalStation(id:\\\"DIGITRANSIT_BIKE_STATION_ID\\\") {\\n name\\n " \
+  "bikesAvailable\\n state\\n spacesAvailable\\n }\\n "                     \
+  "}\\n\",\"variables\":null,\"operationName\":null}"
+
+#define DIGITRANSIT_QUERY                                                    \
+  "{\"query\":\"{\\n  stop(id:\\\"DIGITRANSIT_STATION_ID\\\") {\\n name\\n " \
+  "stoptimesWithoutPatterns(numberOfDepartures: 10) {\\n serviceDay\\n "     \
+  "realtimeDeparture\\n trip {\\n route {\\n "                               \
+  "shortName\\n }\\n }\\n headsign\\n }\\n  } "                              \
   "\\n}\",\"variables\":null,\"operationName\":null}"
 
-#define DIGITRANSIT_URL \
-  "https://api.digitransit.fi:443/routing/v1/routers/DIGITRANSIT_ID/index/graphql"
+#define DIGITRANSIT_URL                                                     \
+  "https://api.digitransit.fi:443/routing/v1/routers/DIGITRANSIT_ID/index/" \
+  "graphql"
 
 #define DIGITRANSIT_FINGERPRINT \
   "8F FD 07 4E 5A 22 19 B4 75 17 45 69 59 88 7C AF 07 75 A4 B6"
 
-#define DIGITRANSIT_CERTIFICATE                                                \
+#define DIGITRANSIT_CERTIFICATE                                        \
   "-----BEGIN CERTIFICATE-----\n"                                      \
   "MIIDxTCCAq2gAwIBAgIQAqxcJmoLQJuPC3nyrkYldzANBgkqhkiG9w0BAQUFADBs\n" \
   "MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3\n" \
@@ -64,14 +71,17 @@ class Digitransit {
  public:
   char station_name[DIGITRANSIT_STRING_SIZE + 1];
   char timetable[DIGITRANSIT_LINES][3][DIGITRANSIT_STRING_SIZE + 1];
+  char bike_station[2][DIGITRANSIT_STRING_SIZE + 1];
 
   bool queryTimetable();
+  bool queryBikeStation();
 
  private:
   Ntp ntp;
   StaticJsonBuffer<4096> json_buffer;
 
-  bool handleResponse(HTTPClient *http);
+  bool handleTimetableResponse(HTTPClient *http);
+  bool handleBusStationResponse(HTTPClient *http);
 };
 
 #endif  // DIGITRANSIT_H
