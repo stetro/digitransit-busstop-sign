@@ -1,4 +1,4 @@
-#include "hsl-display.h"
+#include "digitransit-display.h"
 
 void LiquidCrystalDisplay::clear(){
   lcd->clear();
@@ -6,8 +6,8 @@ void LiquidCrystalDisplay::clear(){
 
 void LiquidCrystalDisplay::init() {
   Serial.printf("[Display] Connecting to Liquid Display 0x%02x\n",
-                HSL_DISPLAY_ADDRESS);
-  lcd = new LiquidCrystal_I2C(HSL_DISPLAY_ADDRESS, 20, 4);
+                DIGITRANSIT_DISPLAY_ADDRESS);
+  lcd = new LiquidCrystal_I2C(DIGITRANSIT_DISPLAY_ADDRESS, 20, 4);
   lcd->init();
   lcd->noCursor();
   lcd->display();
@@ -31,13 +31,13 @@ void LiquidCrystalDisplay::turnOff() {
 void LiquidCrystalDisplay::showError() {
   Serial.println("[Display] Show Error");
   lcd->setCursor(0, 1);
-  lcd->print("HSL Query Error!");
+  lcd->print("DIGITRANSIT Query Error!");
 }
 
 void LiquidCrystalDisplay::showTimetable() {
   Serial.println("[Display] Show Timetable");
-  for (size_t i = 0; i < HSL_LINES; i++) {
-    lcd->printf("%3.3s %12.12s %3.3s", hsl->timetable[i][0],
-                hsl->timetable[i][1] + time_table_ticker, hsl->timetable[i][2]);
+  for (size_t i = 0; i < DIGITRANSIT_LINES; i++) {
+    lcd->printf("%3.3s %12.12s %3.3s", digitransit->timetable[i][0],
+                digitransit->timetable[i][1] + time_table_ticker, digitransit->timetable[i][2]);
   }
 }

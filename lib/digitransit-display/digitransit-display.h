@@ -1,10 +1,10 @@
-#ifndef HSL_DISPLAY_H
-#define HSL_DISPLAY_H
+#ifndef DIGITRANSIT_DISPLAY_H
+#define DIGITRANSIT_DISPLAY_H
 
 
-#ifndef HSL_DISPLAY_ADDRESS
-#define HSL_DISPLAY_ADDRESS 0x3C
-#endif  // HSL_DISPLAY_ADDRESS
+#ifndef DIGITRANSIT_DISPLAY_ADDRESS
+#define DIGITRANSIT_DISPLAY_ADDRESS 0x3C
+#endif  // DIGITRANSIT_DISPLAY_ADDRESS
 
 #ifdef NODE_MCU_ESP32
 #define PIN_WIRE_SDA 21
@@ -12,19 +12,19 @@
 #endif
 
 #include <Wire.h>
-#include <hsl.h>
+#include <digitransit.h>
 
 // Liquid Crystal includes
 #include <LiquidCrystal_I2C.h>
 
 // OLED Display includes
 #include <SSD1306Wire.h>
-#include <hsl-display-font.h>
+#include <digitransit-display-font.h>
 
-class HslDisplay {
+class DigitransitDisplay {
  public:
-  inline void updateTimetable(Hsl* hsl) {
-    this->hsl = hsl;
+  inline void updateTimetable(Digitransit* digitransit) {
+    this->digitransit = digitransit;
     this->time_table_ticker = 0;
   };
 
@@ -37,10 +37,10 @@ class HslDisplay {
 
  protected:
   int time_table_ticker = 0;
-  Hsl* hsl;
+  Digitransit* digitransit;
 };
 
-class OledDisplay : public HslDisplay {
+class OledDisplay : public DigitransitDisplay {
  public:
   void init();
   void clear();
@@ -53,7 +53,7 @@ class OledDisplay : public HslDisplay {
   SSD1306Wire* lcd;
 };
 
-class LiquidCrystalDisplay : public HslDisplay {
+class LiquidCrystalDisplay : public DigitransitDisplay {
  public:
   void init();
   void clear();
@@ -65,4 +65,4 @@ class LiquidCrystalDisplay : public HslDisplay {
  private:
   LiquidCrystal_I2C* lcd;
 };
-#endif  // HSL_DISPLAY_H
+#endif  // DIGITRANSIT_DISPLAY_H
