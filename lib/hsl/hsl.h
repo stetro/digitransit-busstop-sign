@@ -22,7 +22,7 @@
   "\\n}\",\"variables\":null,\"operationName\":null}"
 
 #define HSL_URL \
-  "https://api.digitransit.fi:443/routing/v1/routers/hsl/index/graphql"
+  "https://api.digitransit.fi:443/routing/v1/routers/DIGITRANSIT_ID/index/graphql"
 
 #define HSL_FINGERPRINT \
   "8F FD 07 4E 5A 22 19 B4 75 17 45 69 59 88 7C AF 07 75 A4 B6"

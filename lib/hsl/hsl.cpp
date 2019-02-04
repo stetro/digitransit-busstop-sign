@@ -7,10 +7,12 @@ bool Hsl::queryTimetable() {
 
   // start htps query
   HTTPClient http;
+  String url = HSL_URL;
+  url.replace("DIGITRANSIT_ID", DIGITRANSIT_ID);
 #ifdef NODE_MCU_ESP32
-  http.begin(HSL_URL, HSL_CERTIFICATE);
+  http.begin(url, HSL_CERTIFICATE);
 #else
-  http.begin(HSL_URL, HSL_FINGERPRINT);
+  http.begin(url, HSL_FINGERPRINT);
 #endif
   http.addHeader("Content-Type", "application/json");
   String query = String(HSL_QUERY);
