@@ -1,8 +1,8 @@
 # hsl-busstop-sign
 [![Build Status](https://travis-ci.com/stetro/hsl-busstop-sign.svg?branch=master)](https://travis-ci.com/stetro/hsl-busstop-sign)
-HSL (Helsingin Seudun Liikenne) busstop sign based on ESP8266 or ESP32
+HSL (Helsingin Seudun Liikenne) and Tampere busstop sign based on ESP8266 or ESP32
 
-  - Queries data from HSL with GraphQL
+  - Queries data from digitransit with GraphQL
   - Gets current timestamp via NTP
   - Display current waiting time on Serial and I2C Display
     - I2C OLED display supported
@@ -25,11 +25,11 @@ HSL (Helsingin Seudun Liikenne) busstop sign based on ESP8266 or ESP32
 [NTP] query current time ...
 [NTP] timestamp 1544374441
 
-[HSL] Station:    Erik Spåren tie
-[HSL] 506 Meilahti vi 03m
-[HSL]  78 Rautatiento 05m
-[HSL]  79 Herttoniemi 11m
-[HSL]  57 Munkkiniemi 16m
+[DIGITRANSIT] Station:    Erik Spåren tie
+[DIGITRANSIT] 506 Meilahti vi 03m
+[DIGITRANSIT]  78 Rautatiento 05m
+[DIGITRANSIT]  79 Herttoniemi 11m
+[DIGITRANSIT]  57 Munkkiniemi 16m
 ```
 
 ![](hsl-busstop-sign.png)
@@ -38,9 +38,10 @@ HSL (Helsingin Seudun Liikenne) busstop sign based on ESP8266 or ESP32
 
 How to build your own HSL Busstop Sign:
 
-1. Find your station ID after search in the address bar of https://reittiopas.hsl.fi
+1. Find your station ID after search in the address bar of https://reittiopas.hsl.fi or https://reittiopas.tampere.fi
 2. Set all needed variables in `platformio.ini`
-  - `hsl_station_id` - Graph QL HSL Station ID
+  - `digitransit_station_id` - Graph QL HSL or Tampere Station ID
+  - `digitransit_id` - To switch between HSL and Tampere (`hsl` or `waltti`)
   - `display` - `0` for Liquid Crystal Display and `1` for OLED Display
   - `display_address` - I2C display address
   - `wifi_ssid` and `widi_password`

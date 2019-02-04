@@ -1,21 +1,23 @@
 
-#include "hsl.h"
+#include "digitransit.h"
 
-bool Hsl::queryTimetable() {
+bool Digitransit::queryTimetable() {
   bool success = false;
   Serial.print("[HTTP] start query ...\n");
 
   // start htps query
   HTTPClient http;
+  String url = DIGITRANSIT_URL;
+  url.replace("DIGITRANSIT_ID", DIGITRANSIT_ID);
 #ifdef NODE_MCU_ESP32
-  http.begin(HSL_URL, HSL_CERTIFICATE);
+  http.begin(url, DIGITRANSIT_CERTIFICATE);
 #else
-  http.begin(HSL_URL, HSL_FINGERPRINT);
+  http.begin(url, DIGITRANSIT_FINGERPRINT);
 #endif
   http.addHeader("Content-Type", "application/json");
-  String query = String(HSL_QUERY);
+  String query = String(DIGITRANSIT_QUERY);
 
-  query.replace("HSL_STATION_ID", HSL_STATION_ID);
+  query.replace("DIGITRANSIT_STATION_ID", DIGITRANSIT_STATION_ID);
   int httpCode = http.POST(query);
 
   if (httpCode > 0) {
@@ -34,7 +36,7 @@ bool Hsl::queryTimetable() {
   return success;
 }
 
-bool Hsl::handleResponse(HTTPClient *http) {
+bool Digitransit::handleResponse(HTTPClient *http) {
   bool success = false;
   const char *payload = http->getString().c_str();
   Serial.println("[JSON] parsing response ...");
@@ -47,12 +49,12 @@ bool Hsl::handleResponse(HTTPClient *http) {
       delay(100);
     }
 
-    sprintf(station_name, "%." STR(HSL_STRING_SIZE) "s",
+    sprintf(station_name, "%." STR(DIGITRANSIT_STRING_SIZE) "s",
             root["data"]["stop"]["name"].as<const char *>());
-    Serial.printf("[HSL] Station: %s\n", station_name);
+    Serial.printf("[DIGITRANSIT] Station: %s\n", station_name);
 
     JsonArray &busses = root["data"]["stop"]["stoptimesWithoutPatterns"];
-    for (uint i = 0; i < busses.size() && i < HSL_LINES; i++) {
+    for (uint i = 0; i < busses.size() && i < DIGITRANSIT_LINES; i++) {
       int lineDeparture = busses[i]["realtimeDeparture"];
       long lineServiceDay = busses[i]["serviceDay"];
       int departureFromNow = (lineServiceDay + lineDeparture) - timestamp;
@@ -61,11 +63,11 @@ bool Hsl::handleResponse(HTTPClient *http) {
       }
       sprintf(timetable[i][0], "%3.3s",
               busses[i]["trip"]["route"]["shortName"].as<const char *>());
-      sprintf(timetable[i][1], "%." STR(HSL_STRING_SIZE) "s",
+      sprintf(timetable[i][1], "%." STR(DIGITRANSIT_STRING_SIZE) "s",
               busses[i]["headsign"].as<const char *>());
       sprintf(timetable[i][2], "%2.2dm", (departureFromNow / 60) + 1);
       Serial.printf(
-          "[HSL] %s %-" STR(HSL_STRING_SIZE) "." STR(HSL_STRING_SIZE) "s %s\n",
+          "[DIGITRANSIT] %s %-" STR(DIGITRANSIT_STRING_SIZE) "." STR(DIGITRANSIT_STRING_SIZE) "s %s\n",
           timetable[i][0], timetable[i][1], timetable[i][2]);
     }
     success = true;
