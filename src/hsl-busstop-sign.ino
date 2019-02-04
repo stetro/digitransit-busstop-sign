@@ -13,7 +13,12 @@
 #include <hsl.h>
 
 Hsl hsl;
-HslDisplay display;
+
+#if HSL_DISPLAY == 0
+LiquidCrystalDisplay display;
+#else
+OledDisplay display;
+#endif
 
 void setup() {
   Serial.begin(115200);
@@ -35,6 +40,7 @@ void loop() {
         display.showTimetable();
         delay(60000);
       } else {
+        display.clear();
         display.showError();
         delay(10000);
       }
