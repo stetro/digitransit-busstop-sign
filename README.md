@@ -34,6 +34,10 @@ Finland public transport sign based on ESP8266 or ESP32
 
 ![](frizing.png)
 
+## HSL Bike Station Support
+
+By modifying the `src/main.cpp` and `platformio.ini` you can also show the availablility of bikes of a certain bike station.
+
 ## Usage
 
 How to build your own Station Sign:
