@@ -32,7 +32,7 @@ Finland public transport sign based on ESP8266 or ESP32
 [DIGITRANSIT]  57 Munkkiniemi 16m
 ```
 
-![](hsl-busstop-sign.png)
+![](frizing.png)
 
 ## Usage
 
