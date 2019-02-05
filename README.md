@@ -1,5 +1,7 @@
 # hsl-busstop-sign
-[![Build Status](https://travis-ci.com/stetro/hsl-busstop-sign.svg?branch=master)](https://travis-ci.com/stetro/hsl-busstop-sign)
+
+[![Build Status](https://travis-ci.com/stetro/digitransit-busstop-sign.svg?branch=master)](https://travis-ci.com/stetro/digitransit-busstop-sign)
+
 Finland public transport sign based on ESP8266 or ESP32
 
   - Queries data from digitransit with GraphQL
