@@ -60,6 +60,9 @@ How to build your own Station Sign:
 4. Connect to it and open the shown address in your browser
 5. Apply configurations as shown in the web ui
 
+![](demo2.jpg)
+![](demo3.png)
+
 ### Partlist
 
 For the basic usage only the NodeMcu and LCD display is needed.
