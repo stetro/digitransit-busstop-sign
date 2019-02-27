@@ -56,3 +56,12 @@ void OledDisplay::showBikeStation() {
   lcd->drawString(0, 48, digitransit->bike_station[1]);
   lcd->display();
 }
+
+void OledDisplay::showConfiguration(Configuration* configuration) {
+  Serial.println("[Display] Configuration");
+  lcd->drawString(0, 0, "WiFi SSID:");
+  lcd->drawString(0, 16, configuration->get_ssid());
+  lcd->drawString(0, 32, "IP Address:");
+  lcd->drawString(0, 48, configuration->get_ip_address());
+  lcd->display();
+}

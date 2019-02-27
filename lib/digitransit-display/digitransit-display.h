@@ -13,6 +13,7 @@
 
 #include <Wire.h>
 #include <digitransit.h>
+#include <configuration.h>
 
 // Liquid Crystal includes
 #include <LiquidCrystal_I2C.h>
@@ -35,6 +36,7 @@ class DigitransitDisplay {
   virtual void showBikeStation() = 0;
   virtual void showError() = 0;
   virtual void turnOff() = 0;
+  virtual void showConfiguration(Configuration* configuration) = 0;
 
  protected:
   int time_table_ticker = 0;
@@ -50,6 +52,7 @@ class OledDisplay : public DigitransitDisplay {
   void showBikeStation();
   void showError();
   void turnOff();
+  virtual void showConfiguration(Configuration* configuration);
 
  private:
   SSD1306Wire* lcd;
@@ -64,6 +67,7 @@ class LiquidCrystalDisplay : public DigitransitDisplay {
   void showBikeStation();
   void showError();
   void turnOff();
+  virtual void showConfiguration(Configuration* configuration);
 
  private:
   LiquidCrystal_I2C* lcd;

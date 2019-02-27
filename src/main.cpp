@@ -9,10 +9,14 @@
 #include <WiFi.h>
 #endif
 
+#define MAX_WIFI_RETRIES 20
+
+#include <configuration.h>
 #include <digitransit-display.h>
 #include <digitransit.h>
 
 Digitransit digitransit;
+Configuration configuration;
 
 #if DIGITRANSIT_DISPLAY == 0
 LiquidCrystalDisplay display;
@@ -20,6 +24,8 @@ LiquidCrystalDisplay display;
 OledDisplay display;
 #endif
 
+int wifi_connection_retries = 0;
+bool wifi_configuration_mode = false;
 bool wifiConnected() { return (WiFi.status() == WL_CONNECTED); }
 
 void setup() {
@@ -33,19 +39,9 @@ void setup() {
 }
 
 void loop() {
-  if (wifiConnected()) {
+  if (wifiConnected() && !wifi_configuration_mode) {
     Serial.println("[WIFI] connected");
     while (true) {
-      // if (digitransit.queryBikeStation()) {
-      //   display.clear();
-      //   display.updateTimetable(&digitransit);
-      //   display.showBikeStation();
-      //   delay(5000);
-      // } else {
-      //   display.clear();
-      //   display.showError();
-      //   delay(10000);
-      // }
       if (digitransit.queryTimetable()) {
         display.clear();
         display.updateTimetable(&digitransit);
@@ -59,9 +55,19 @@ void loop() {
     }
     display.clear();
     display.turnOff();
-  } else {
+  } else if (!wifi_configuration_mode) {
     Serial.println("[WIFI] not connected to wifi, still trying ...");
     delay(1000);
+    wifi_connection_retries++;
+    if (wifi_connection_retries >= MAX_WIFI_RETRIES) {
+      WiFi.disconnect();
+      wifi_configuration_mode = true;
+      configuration.init();
+      delay(1000);
+      display.clear();
+      display.showConfiguration(&configuration);
+    }
+  } else {
+    // Configuration Async Webserver
   }
 }
-
