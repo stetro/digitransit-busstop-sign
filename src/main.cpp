@@ -42,6 +42,11 @@ void setup() {
 }
 
 void loop() {
+  if(Serial.available()>0){
+    if(Serial.read() == 'c'){
+      configuration.clear();
+    }
+  }
   if (wifiConnected() && !wifi_configuration_mode) {
     Serial.println("[WIFI] connected");
     while (true) {

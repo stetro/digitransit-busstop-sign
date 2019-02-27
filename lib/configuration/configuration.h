@@ -38,6 +38,7 @@ class Configuration {
   inline char* get_ssid() { return ssid; }
   inline const char* get_ip_address() { return ip_address.c_str(); }
   ConfigurationData* get_configuration();
+  void clear();
 };
 
 

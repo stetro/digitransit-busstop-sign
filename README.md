@@ -43,6 +43,7 @@ Finland public transport sign based on ESP8266 or ESP32
 * Shows availables bikes in bike stations
 * Turns off after 5 mimnutes
 * Easy configuration with wifi hotstop web-ui
+* Send `'c'` via serial during bootup for reconfiguration
 
 ## Usage
 
