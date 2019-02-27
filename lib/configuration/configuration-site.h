@@ -2,7 +2,7 @@
 #define CONFIGURATION_SITE_H
 
 
-const char INDEX_HTML[] PROGMEM = R"=====(
+const char INDEX_HTML[] = R"=====(
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -58,7 +58,6 @@ margin: 20px;
 </form>
 
 </body>
-</html>
-)=====";
+</html>)=====";
 
 #endif  // CONFIGURATION_SITE_H
