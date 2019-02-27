@@ -25,9 +25,9 @@ void Configuration::init() {
     String ssid = request->arg("ssid");
     Serial.println("[Configuration] ssid " + ssid);
     sprintf(data.ssid, "%s", ssid.c_str());
-    
+
     String password = request->arg("password");
-    Serial.println("[Configuration] password " + password);
+    Serial.println("[Configuration] password ***");
     sprintf(data.password, "%s", password.c_str());
 
     String station = request->arg("station");
@@ -37,6 +37,10 @@ void Configuration::init() {
     String server = request->arg("server");
     Serial.println("[Configuration] server " + server);
     sprintf(data.digitransit_server_id, "%s", server.c_str());
+
+    String station_type = request->arg("station_type");
+    Serial.println("[Configuration] station type " + station_type);
+    data.bike_station = station_type.equals("bike");
 
     EEPROM.put(0, data);
     EEPROM.commit();
@@ -49,4 +53,21 @@ void Configuration::init() {
 
   Serial.printf("[Configuration] Running Soft AP at %s\n",
                 WiFi.softAPIP().toString().c_str());
+}
+
+ConfigurationData *Configuration::get_configuration() {
+  Serial.println("[Configuration] loading configuration");
+  EEPROM.begin(512);
+  EEPROM.get(0, configuration_data);
+
+  Serial.printf("[Configuration] ssid %s ", configuration_data.ssid);
+  Serial.printf("[Configuration] password ***");
+  Serial.printf("[Configuration] server %s ",
+                configuration_data.digitransit_server_id);
+  Serial.printf("[Configuration] station %s ",
+                configuration_data.digitransit_station_id);
+  Serial.printf("[Configuration] station type %s ",
+                configuration_data.bike_station ? "Bike" : "Bus");
+
+  return &configuration_data;
 }

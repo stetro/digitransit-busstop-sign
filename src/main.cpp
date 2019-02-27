@@ -17,6 +17,7 @@
 
 Digitransit digitransit;
 Configuration configuration;
+ConfigurationData* configuration_data;
 
 #if DIGITRANSIT_DISPLAY == 0
 LiquidCrystalDisplay display;
@@ -34,18 +35,35 @@ void setup() {
   display.init();
   display.showLoadingScreen();
 
+  configuration_data = configuration.get_configuration();
+
   Serial.println("[WIFI] connecting to wifi ...");
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  WiFi.begin(configuration_data->ssid, configuration_data->password);
 }
 
 void loop() {
   if (wifiConnected() && !wifi_configuration_mode) {
     Serial.println("[WIFI] connected");
     while (true) {
-      if (digitransit.queryTimetable()) {
+      bool querySucceeded = false;
+      if (configuration_data->bike_station) {
+        querySucceeded = digitransit.queryBikeStation(
+            configuration_data->digitransit_server_id,
+            configuration_data->digitransit_station_id);
+      } else {
+        querySucceeded = digitransit.queryTimetable(
+            configuration_data->digitransit_server_id,
+            configuration_data->digitransit_station_id);
+      }
+
+      if (querySucceeded) {
         display.clear();
         display.updateTimetable(&digitransit);
-        display.showTimetable();
+        if (configuration_data->bike_station) {
+          display.showBikeStation();
+        } else {
+          display.showTimetable();
+        }
         delay(60000);
       } else {
         display.clear();

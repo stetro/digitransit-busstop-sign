@@ -28,7 +28,7 @@
   "\\n}\",\"variables\":null,\"operationName\":null}"
 
 #define DIGITRANSIT_URL                                                     \
-  "https://api.digitransit.fi:443/routing/v1/routers/DIGITRANSIT_ID/index/" \
+  "https://api.digitransit.fi:443/routing/v1/routers/DIGITRANSIT_SERVER_ID/index/" \
   "graphql"
 
 #define DIGITRANSIT_FINGERPRINT \
@@ -73,8 +73,8 @@ class Digitransit {
   char timetable[DIGITRANSIT_LINES][3][DIGITRANSIT_STRING_SIZE + 1];
   char bike_station[2][DIGITRANSIT_STRING_SIZE + 1];
 
-  bool queryTimetable();
-  bool queryBikeStation();
+  bool queryTimetable(const char * server_id, const char * station_id);
+  bool queryBikeStation(const char * server_id, const char * station_id);
 
  private:
   Ntp ntp;
