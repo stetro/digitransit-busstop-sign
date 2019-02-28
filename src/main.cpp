@@ -36,14 +36,24 @@ void setup() {
   display.showLoadingScreen();
 
   configuration_data = configuration.get_configuration();
+  if (!(configuration_data->eeprom_check[0] == 'O' &&
+        configuration_data->eeprom_check[1] == 'K')) {
+    WiFi.disconnect();
+    wifi_configuration_mode = true;
+    configuration.init();
+    delay(1000);
+    display.clear();
+    display.showConfiguration(&configuration);
+    return;
+  }
 
   Serial.println("[WIFI] connecting to wifi ...");
   WiFi.begin(configuration_data->ssid, configuration_data->password);
 }
 
 void loop() {
-  if(Serial.available()>0){
-    if(Serial.read() == 'c'){
+  if (Serial.available() > 0) {
+    if (Serial.read() == 'c') {
       configuration.clear();
     }
   }

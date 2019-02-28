@@ -42,6 +42,8 @@ void Configuration::init() {
     Serial.println("[Configuration] station type " + station_type);
     data.bike_station = station_type.equals("bike");
 
+    sprintf(data.eeprom_check, "OK");
+
     EEPROM.put(0, data);
     EEPROM.commit();
 
@@ -60,6 +62,7 @@ ConfigurationData *Configuration::get_configuration() {
   EEPROM.begin(512);
   EEPROM.get(0, configuration_data);
 
+  Serial.printf("[Configuration] EEPROM %s \n", configuration_data.eeprom_check);
   Serial.printf("[Configuration] ssid %s \n", configuration_data.ssid);
   Serial.printf("[Configuration] password ***\n");
   Serial.printf("[Configuration] server %s \n",
@@ -76,6 +79,7 @@ void Configuration::clear() {
   Serial.println("[Configuration] clear configuration");
   EEPROM.begin(512);
   ConfigurationData data;
+  sprintf(data.eeprom_check, "**");
   sprintf(data.ssid, "***");
   sprintf(data.password, "***");
   sprintf(data.digitransit_server_id, "***");

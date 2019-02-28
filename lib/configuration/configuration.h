@@ -18,6 +18,7 @@
 #include <ESPAsyncWebServer.h>
 
 struct ConfigurationData{
+  char eeprom_check[3];
   char ssid[CONFIGURATION_DATA_BUFFER_SIZE];
   char password[CONFIGURATION_DATA_BUFFER_SIZE];
   char digitransit_station_id[CONFIGURATION_DATA_BUFFER_SIZE];
