@@ -50,3 +50,15 @@ void LiquidCrystalDisplay::showBikeStation() {
   lcd->setCursor(0, 3);
   lcd->printf("%s", digitransit->bike_station[1]);
 }
+
+void LiquidCrystalDisplay::showConfiguration(Configuration* configuration) {
+  Serial.println("[Display] Configuration");
+  lcd->setCursor(0, 0);
+  lcd->print("WiFi AccessPoint:");
+  lcd->setCursor(0, 1);
+  lcd->printf("SSID: %s", configuration->get_ssid());
+  lcd->setCursor(0, 2);
+  lcd->print("IP Address:");
+  lcd->setCursor(0, 3);
+  lcd->printf("%s", configuration->get_ip_address());
+}

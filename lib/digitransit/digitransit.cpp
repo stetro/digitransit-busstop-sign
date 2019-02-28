@@ -1,14 +1,14 @@
 
 #include "digitransit.h"
 
-bool Digitransit::queryTimetable() {
+bool Digitransit::queryTimetable(const char * server_id, const char * station_id) {
   bool success = false;
   Serial.print("[HTTP] start query ...\n");
 
   // start htps query
   HTTPClient http;
   String url = DIGITRANSIT_URL;
-  url.replace("DIGITRANSIT_ID", DIGITRANSIT_ID);
+  url.replace("DIGITRANSIT_SERVER_ID", server_id);
 #ifdef NODE_MCU_ESP32
   http.begin(url, DIGITRANSIT_CERTIFICATE);
 #else
@@ -17,7 +17,7 @@ bool Digitransit::queryTimetable() {
   http.addHeader("Content-Type", "application/json");
   String query = String(DIGITRANSIT_QUERY);
 
-  query.replace("DIGITRANSIT_STATION_ID", DIGITRANSIT_STATION_ID);
+  query.replace("DIGITRANSIT_STATION_ID", station_id);
   int httpCode = http.POST(query);
 
   if (httpCode > 0) {
@@ -78,14 +78,14 @@ bool Digitransit::handleTimetableResponse(HTTPClient *http) {
   return success;
 }
 
-bool Digitransit::queryBikeStation() {
+bool Digitransit::queryBikeStation(const char * server_id, const char * station_id) {
   bool success = false;
   Serial.print("[HTTP] start bike station query ...\n");
 
   // start htps query
   HTTPClient http;
   String url = DIGITRANSIT_URL;
-  url.replace("DIGITRANSIT_ID", DIGITRANSIT_ID);
+  url.replace("DIGITRANSIT_SERVER_ID", server_id);
 #ifdef NODE_MCU_ESP32
   http.begin(url, DIGITRANSIT_CERTIFICATE);
 #else
@@ -94,7 +94,7 @@ bool Digitransit::queryBikeStation() {
   http.addHeader("Content-Type", "application/json");
   String query = String(DIGITRANSIT_BUS_STATION_QUERY);
 
-  query.replace("DIGITRANSIT_BIKE_STATION_ID", DIGITRANSIT_BIKE_STATION_ID);
+  query.replace("DIGITRANSIT_BIKE_STATION_ID", station_id);
   int httpCode = http.POST(query);
 
   if (httpCode > 0) {

@@ -36,25 +36,32 @@ Finland public transport sign based on ESP8266 or ESP32
 
 ![](frizing.png)
 
-## HSL Bike Station Support
+## Features
 
-By modifying the `src/main.cpp` and `platformio.ini` you can also show the availablility of bikes of a certain bike station.
+* Connects to your WiFi
+* Shows realtime timetables for bus, tram and metro stations
+* Shows availables bikes in bike stations
+* Turns off after 5 mimnutes
+* Easy configuration with wifi hotstop web-ui
+* Send `'c'` via serial during bootup for reconfiguration
 
 ## Usage
 
 How to build your own Station Sign:
 
-1. Find your station ID after search in the address bar of your local reittiopas http://waltti.fi/reittiopas/ or https://reittiopas.hsl.fi
-2. Set all needed variables in `platformio.ini`
-  - `digitransit_station_id` - GraphQL HSL or Waltti Station ID
-  - `digitransit_id` - To switch between HSL and Waltti (`hsl` or `waltti`)
+1. Set all needed variables in `platformio.ini`
   - `display` - `0` for Liquid Crystal Display and `1` for OLED Display
   - `display_address` - I2C display address
-  - `wifi_ssid` and `widi_password`
-3. Install PlatformIO and flash NodeMCU
+2. Install PlatformIO and flash NodeMCU
   - `pip install -U platformio`
   - `platformio update`
   - `platformio run --target upload`
+3. Power the device and wait 20 Seconds until access point is shown on the display
+4. Connect to it and open the shown address in your browser
+5. Apply configurations as shown in the web ui
+
+![](demo2.jpg)
+![](demo3.png)
 
 ### Partlist
 

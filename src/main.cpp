@@ -9,10 +9,15 @@
 #include <WiFi.h>
 #endif
 
+#define MAX_WIFI_RETRIES 20
+
+#include <configuration.h>
 #include <digitransit-display.h>
 #include <digitransit.h>
 
 Digitransit digitransit;
+Configuration configuration;
+ConfigurationData* configuration_data;
 
 #if DIGITRANSIT_DISPLAY == 0
 LiquidCrystalDisplay display;
@@ -20,6 +25,8 @@ LiquidCrystalDisplay display;
 OledDisplay display;
 #endif
 
+int wifi_connection_retries = 0;
+bool wifi_configuration_mode = false;
 bool wifiConnected() { return (WiFi.status() == WL_CONNECTED); }
 
 void setup() {
@@ -28,28 +35,50 @@ void setup() {
   display.init();
   display.showLoadingScreen();
 
+  configuration_data = configuration.get_configuration();
+  if (!(configuration_data->eeprom_check[0] == 'O' &&
+        configuration_data->eeprom_check[1] == 'K')) {
+    WiFi.disconnect();
+    wifi_configuration_mode = true;
+    configuration.init();
+    delay(1000);
+    display.clear();
+    display.showConfiguration(&configuration);
+    return;
+  }
+
   Serial.println("[WIFI] connecting to wifi ...");
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  WiFi.begin(configuration_data->ssid, configuration_data->password);
 }
 
 void loop() {
-  if (wifiConnected()) {
+  if (Serial.available() > 0) {
+    if (Serial.read() == 'c') {
+      configuration.clear();
+    }
+  }
+  if (wifiConnected() && !wifi_configuration_mode) {
     Serial.println("[WIFI] connected");
     while (true) {
-      // if (digitransit.queryBikeStation()) {
-      //   display.clear();
-      //   display.updateTimetable(&digitransit);
-      //   display.showBikeStation();
-      //   delay(5000);
-      // } else {
-      //   display.clear();
-      //   display.showError();
-      //   delay(10000);
-      // }
-      if (digitransit.queryTimetable()) {
+      bool querySucceeded = false;
+      if (configuration_data->bike_station) {
+        querySucceeded = digitransit.queryBikeStation(
+            configuration_data->digitransit_server_id,
+            configuration_data->digitransit_station_id);
+      } else {
+        querySucceeded = digitransit.queryTimetable(
+            configuration_data->digitransit_server_id,
+            configuration_data->digitransit_station_id);
+      }
+
+      if (querySucceeded) {
         display.clear();
         display.updateTimetable(&digitransit);
-        display.showTimetable();
+        if (configuration_data->bike_station) {
+          display.showBikeStation();
+        } else {
+          display.showTimetable();
+        }
         delay(60000);
       } else {
         display.clear();
@@ -59,9 +88,19 @@ void loop() {
     }
     display.clear();
     display.turnOff();
-  } else {
+  } else if (!wifi_configuration_mode) {
     Serial.println("[WIFI] not connected to wifi, still trying ...");
     delay(1000);
+    wifi_connection_retries++;
+    if (wifi_connection_retries >= MAX_WIFI_RETRIES) {
+      WiFi.disconnect();
+      wifi_configuration_mode = true;
+      configuration.init();
+      delay(1000);
+      display.clear();
+      display.showConfiguration(&configuration);
+    }
+  } else {
+    // Configuration Async Webserver
   }
 }
-
