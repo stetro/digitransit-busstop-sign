@@ -29,6 +29,7 @@ void OledDisplay::showLoadingScreen() {
 void OledDisplay::turnOff() {
   Serial.println("[Display] Clear");
   lcd->clear();
+  lcd->display();
 }
 
 void OledDisplay::showError() {
