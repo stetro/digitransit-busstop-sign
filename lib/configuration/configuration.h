@@ -24,6 +24,7 @@ struct ConfigurationData{
   char digitransit_station_id[CONFIGURATION_DATA_BUFFER_SIZE];
   char digitransit_server_id[CONFIGURATION_DATA_BUFFER_SIZE];
   bool bike_station = false;
+  int turnoff = 0;
 };
 
 class Configuration {

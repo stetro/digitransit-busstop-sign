@@ -49,6 +49,11 @@ const char INDEX_HTML[] = R"=====(
 </select>
 </div>
 
+<div class="pure-control-group">
+<label for="turnoff">Turnoff interval<br/>in seconds</label>
+<input id="turnoff" type="number" placeholder="Seconds" name="turnoff" value="0">
+</div>
+
 <div class="pure-controls">
 <button type="submit" class="pure-button pure-button-primary">Update Configuration</button>
 </div>
@@ -116,6 +121,12 @@ margin: 20px;
 <option value="bus">Metro, Tram, Bus Stop</option>
 <option value="bike">Bike Station</option>
 </select>
+</div>
+
+
+<div class="pure-control-group">
+<label for="turnoff">Turnoff interval<br/>in seconds</label>
+<input id="turnoff" type="number" placeholder="Seconds" name="turnoff" value="0">
 </div>
 
 <div class="pure-controls">
