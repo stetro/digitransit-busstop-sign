@@ -16,6 +16,7 @@ const char INDEX_HTML[] = R"=====(
 <p>Configure your stop sign with the following configurations. More information in the <a href="https://github.com/stetro/digitransit-busstop-sign">Github Repo</a> README.</p>
 <p>Find your station ID after search in the address bar of your local reittiopas <a href="http://waltti.fi/reittiopas/">http://waltti.fi/reittiopas/</a> or <a href="https://reittiopas.hsl.fi">https://reittiopas.hsl.fi</a></p>
 <p>For bike station support: find your bike station in <a href="https://kaupunkipyorat.hsl.fi/en/stations">https://kaupunkipyorat.hsl.fi/en/stations<a/> and choose HSL as server.</p>
+<p>Set the turnoff time to 0 to run it endlessly.</p>
 <form class="pure-form pure-form-aligned" method="POST" action="update">
 <fieldset>
 <div class="pure-control-group">
@@ -90,6 +91,7 @@ margin: 20px;
 <p>Configure your stop sign with the following configurations. More information in the <a href="https://github.com/stetro/digitransit-busstop-sign">Github Repo</a> README.</p>
 <p>Find your station ID after search in the address bar of your local reittiopas <a href="http://waltti.fi/reittiopas/">http://waltti.fi/reittiopas/</a> or <a href="https://reittiopas.hsl.fi">https://reittiopas.hsl.fi</a></p>
 <p>For bike station support: find your bike station in <a href="https://kaupunkipyorat.hsl.fi/en/stations">https://kaupunkipyorat.hsl.fi/en/stations<a/> and choose HSL as server.</p>
+<p>Set the turnoff time to 0 to run it endlessly.</p>
 <form class="pure-form pure-form-aligned" method="POST" action="update">
 <fieldset>
 <div class="pure-control-group">
