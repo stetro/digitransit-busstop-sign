@@ -2,6 +2,7 @@
 #include <configuration.h>
 
 void Configuration::init() {
+  WiFi.begin();
   WiFi.macAddress(ssid_buffer);
   sprintf(ssid, "%02X%02X%02X%02X%02X%02X", ssid_buffer[0], ssid_buffer[1],
           ssid_buffer[2], ssid_buffer[3], ssid_buffer[4], ssid_buffer[5]);
