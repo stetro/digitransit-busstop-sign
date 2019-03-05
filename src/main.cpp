@@ -25,6 +25,7 @@ LiquidCrystalDisplay display;
 OledDisplay display;
 #endif
 
+int show_counter = 0;
 int wifi_connection_retries = 0;
 bool wifi_configuration_mode = false;
 bool wifiConnected() { return (WiFi.status() == WL_CONNECTED); }
@@ -80,6 +81,13 @@ void loop() {
           display.showTimetable();
         }
         delay(60000);
+        show_counter++;
+        if (show_counter >= configuration_data->turnoff &&
+            configuration_data->turnoff > 0) {
+          display.turnOff();
+          delay(1000);
+          ESP.deepSleep(-1);  // go to endless deepsleep
+        }
       } else {
         display.clear();
         display.showError();

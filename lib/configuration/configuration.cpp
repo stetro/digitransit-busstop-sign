@@ -2,6 +2,7 @@
 #include <configuration.h>
 
 void Configuration::init() {
+  WiFi.begin();
   WiFi.macAddress(ssid_buffer);
   sprintf(ssid, "%02X%02X%02X%02X%02X%02X", ssid_buffer[0], ssid_buffer[1],
           ssid_buffer[2], ssid_buffer[3], ssid_buffer[4], ssid_buffer[5]);
@@ -42,6 +43,10 @@ void Configuration::init() {
     Serial.println("[Configuration] station type " + station_type);
     data.bike_station = station_type.equals("bike");
 
+    String turnoff = request->arg("turnoff");
+    Serial.println("[Configuration] station type " + turnoff);
+    data.turnoff = turnoff.toInt();
+
     sprintf(data.eeprom_check, "OK");
 
     EEPROM.put(0, data);
@@ -62,7 +67,8 @@ ConfigurationData *Configuration::get_configuration() {
   EEPROM.begin(512);
   EEPROM.get(0, configuration_data);
 
-  Serial.printf("[Configuration] EEPROM %s \n", configuration_data.eeprom_check);
+  Serial.printf("[Configuration] EEPROM %s \n",
+                configuration_data.eeprom_check);
   Serial.printf("[Configuration] ssid %s \n", configuration_data.ssid);
   Serial.printf("[Configuration] password ***\n");
   Serial.printf("[Configuration] server %s \n",
@@ -71,6 +77,8 @@ ConfigurationData *Configuration::get_configuration() {
                 configuration_data.digitransit_station_id);
   Serial.printf("[Configuration] station type %s \n",
                 configuration_data.bike_station ? "Bike" : "Bus");
+  Serial.printf("[Configuration] turn off seconds %d \n",
+                configuration_data.turnoff);
 
   return &configuration_data;
 }
@@ -85,6 +93,7 @@ void Configuration::clear() {
   sprintf(data.digitransit_server_id, "***");
   sprintf(data.digitransit_station_id, "***");
   data.bike_station = false;
+  data.turnoff = 0;
   EEPROM.put(0, data);
   EEPROM.commit();
 }
