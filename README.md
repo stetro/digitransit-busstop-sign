@@ -44,6 +44,7 @@ Finland public transport sign based on ESP8266 or ESP32
 * Turns off after 5 mimnutes
 * Easy configuration with wifi hotstop web-ui
 * Send `'c'` via serial during bootup for reconfiguration
+* Turns off after `n` minutes. (set to 0 to run endlessly)
 
 ## Usage
 
