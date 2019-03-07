@@ -3,10 +3,12 @@
 
 #ifdef NODE_MCU_ESP8266
 #include <ESP8266WiFi.h>
+#define ENDLESS_DEEPSLEEP 0
 #endif
 
 #ifdef NODE_MCU_ESP32
 #include <WiFi.h>
+#define ENDLESS_DEEPSLEEP -1
 #endif
 
 #define MAX_WIFI_RETRIES 20
@@ -29,6 +31,13 @@ int show_counter = 0;
 int wifi_connection_retries = 0;
 bool wifi_configuration_mode = false;
 bool wifiConnected() { return (WiFi.status() == WL_CONNECTED); }
+
+void deepSleep() {
+  display.turnOff();
+  Serial.println("[ESP] deep sleep");
+  delay(1000);
+  ESP.deepSleep(ENDLESS_DEEPSLEEP);
+}
 
 void setup() {
   Serial.begin(115200);
@@ -84,9 +93,7 @@ void loop() {
         show_counter++;
         if (show_counter >= configuration_data->turnoff &&
             configuration_data->turnoff > 0) {
-          display.turnOff();
-          delay(1000);
-          ESP.deepSleep(-1);  // go to endless deepsleep
+          deepSleep();
         }
       } else {
         display.clear();

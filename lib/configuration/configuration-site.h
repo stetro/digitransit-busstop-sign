@@ -51,8 +51,8 @@ const char INDEX_HTML[] = R"=====(
 </div>
 
 <div class="pure-control-group">
-<label for="turnoff">Turnoff interval<br/>in seconds</label>
-<input id="turnoff" type="number" placeholder="Seconds" name="turnoff" value="0">
+<label for="turnoff">Turnoff interval<br/>in minutes</label>
+<input id="turnoff" type="number" placeholder="minutes" name="turnoff" value="0">
 </div>
 
 <div class="pure-controls">
@@ -127,8 +127,8 @@ margin: 20px;
 
 
 <div class="pure-control-group">
-<label for="turnoff">Turnoff interval<br/>in seconds</label>
-<input id="turnoff" type="number" placeholder="Seconds" name="turnoff" value="0">
+<label for="turnoff">Turnoff interval<br/>in minutes</label>
+<input id="turnoff" type="number" placeholder="minutes" name="turnoff" value="0">
 </div>
 
 <div class="pure-controls">
