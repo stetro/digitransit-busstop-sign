@@ -61,6 +61,8 @@ How to build your own Station Sign:
 4. Connect to it and open the shown address in your browser
 5. Apply configurations as shown in the web ui
 
+> Enclosure examples for both display types can be found in `case/`.
+
 ![](demo2.jpg)
 ![](demo3.png)
 
