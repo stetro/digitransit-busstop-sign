@@ -27,6 +27,6 @@ union(){
 
     
     // lid
-//    translate([width+20,0,0])
-//    cube([width - 2*wall - snug_fit, length- 2*wall - snug_fit, wall]);
+    translate([width+20,0,0])
+    cube([width - 2*wall - snug_fit, length- 2*wall - snug_fit, wall]);
 }
