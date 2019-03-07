@@ -77,7 +77,7 @@ ConfigurationData *Configuration::get_configuration() {
                 configuration_data.digitransit_station_id);
   Serial.printf("[Configuration] station type %s \n",
                 configuration_data.bike_station ? "Bike" : "Bus");
-  Serial.printf("[Configuration] turn off seconds %d \n",
+  Serial.printf("[Configuration] turn off minutes %d \n",
                 configuration_data.turnoff);
 
   return &configuration_data;
