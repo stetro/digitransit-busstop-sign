@@ -1,5 +1,5 @@
  width = 64;
-length = 130;
+length = 134;
 depth = 15;
 wall = 1;
 fitting = 0.001;
@@ -27,6 +27,6 @@ union(){
 
     
     // lid
-    translate([width+20,0,0])
-    cube([width - 2*wall - snug_fit, length- 2*wall - snug_fit, wall]);
+    //translate([width+20,0,0])
+//    cube([width - 2*wall - snug_fit, length- 2*wall - snug_fit, wall]);
 }
