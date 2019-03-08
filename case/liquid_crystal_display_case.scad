@@ -1,5 +1,5 @@
  width = 64;
-length = 130;
+length = 134;
 depth = 15;
 wall = 1;
 fitting = 0.001;
